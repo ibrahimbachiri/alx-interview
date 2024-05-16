@@ -1,13 +1,17 @@
+
 #!/usr/bin/python3
-""" N queens puzzle, challenge of placing N non attacking queens
-on a NxN chessboard
-This program solves the N queens problem """
+
+'''
+N queens
+'''
 
 from sys import argv
 
 
 def is_NQueen(cell: list) -> bool:
-    """ False if not N Queen, True if N Queen """
+    '''
+    True if N Queen, False if not
+    '''
     row_number = len(cell) - 1
     difference = 0
     for index in range(0, row_number):
@@ -19,18 +23,21 @@ def is_NQueen(cell: list) -> bool:
     return True
 
 
-def solve_NQueens(dimension: int, row: int, cell: list, output: list):
-    """ Return result of N Queens recursively """
+def solve_NQeens(dimension: int, row: int, cell: list, outcome: list):
+    """
+    Return result of N Queens recusrivley
+    """
+    # Base case
     if row == dimension:
-        print(output)
+        print(outcome)
     else:
-        for column in range(0, dimension):
-            cell.append(column)
-            output.append([row, column])
+        for col in range(0, dimension):
+            cell.append(col)
+            outcome.append([row, col])
             if (is_NQueen(cell)):
-                solve_NQueens(dimension, row + 1, cell, output)
+                solve_NQeens(dimension, row + 1, cell, outcome)
             cell.pop()
-            output.pop()
+            outcome.pop()
 
 
 if len(argv) != 2:
@@ -45,6 +52,6 @@ if N < 4:
     print('N must be at least 4')
     exit(1)
 else:
-    output = []
+    outcome = []
     cell = 0
-    solve_NQueens(int(N), cell, [], output)
+    solve_NQeens(int(N), cell, [], outcome)
